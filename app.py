@@ -7,6 +7,7 @@ import pandas as pd
 import plotly.express as px
 import io
 from home import home_run
+from data import data_run
 
 def main() :
     menu = ["홈", "테슬라 누적 주가 데이터", "테슬라 향후 주가 예측"]
@@ -21,12 +22,13 @@ def main() :
         "nav-link-selected": {"background-color": "#F29661"},
     }
     )
+        st.link_button('데이터 출처 바로가기',url = 'https://www.nasdaq.com/market-activity/stocks/tsla/historical')
 
-    if choice[0] == menu[0] :
-        home_run()  # 함수 호출 부분 수정
-    elif choice[1] == menu[1] :
-        pass
-    elif choice[2] == menu[2] :
+    if choice == menu[0] :
+        home_run()
+    elif choice == menu[1] :
+        data_run()
+    elif choice == menu[2] :
         pass
 
 if __name__ == '__main__':

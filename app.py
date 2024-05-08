@@ -10,7 +10,7 @@ from home import home_run
 from data import data_run
 
 def main() :
-    menu = ["홈", "테슬라 누적 주가 데이터", "테슬라 향후 주가 예측"]
+    menu = ["홈", "테슬라 주가 데이터 및 차트", "테슬라 향후 주가 예측"]
     with st.sidebar:
         choice = option_menu("메뉴", menu,
                          icons=['house', 'bi bi-clipboard2-data', 'bi bi-graph-up-arrow'],

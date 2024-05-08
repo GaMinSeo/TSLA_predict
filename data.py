@@ -72,8 +72,8 @@ def data_run():
             df_max = df['종가'].max()
             df_min = df['종가'].min()
             df_mean = df['종가'].mean()
-            st.text("선택하신 날짜 내에서 테슬라의 최고가는 $" + str(round(df_max,2)) + " 이고, 최저가는 $"+ str(round(df_min,2)) + " 입니다.")
-            st.text("평균 주가는 $" + str(round(df_mean,2)) + " 입니다.")
+            st.markdown("<h5>선택하신 날짜 내에서 테슬라의 최고가는 $" + str(round(df_max,2)) + " 이고, 최저가는 $"+ str(round(df_min,2)) + " 입니다.", unsafe_allow_html=True)
+            st.markdown("<h5>평균 주가는 $" + str(round(df_mean,2)) + " 입니다.", unsafe_allow_html=True)
 
         elif currency == '원화' :
             df['종가'] = df['종가'].str.replace(',', '').astype(int)

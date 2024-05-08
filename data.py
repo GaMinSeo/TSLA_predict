@@ -2,7 +2,7 @@ import plotly.graph_objects as go
 import pandas as pd
 import streamlit as st
 import datetime
-
+from comma import comma
 
 import matplotlib.pyplot as plt
 def data_run():
@@ -38,21 +38,43 @@ def data_run():
 
     st.markdown("<hr style='border-top: 5px solid #aaa;'>", unsafe_allow_html=True) # 두께 5px로 조절
     
-    st.subheader('원하는 날짜 내에 테슬라 주가를 확인할수 있습니다.:chart_with_upwards_trend:')       
-    # 시작일과 종료일 생성 
-    col1, col2 = st.columns(2)
-    with col1:
-        start_date = st.date_input('시작 날짜', datetime.datetime(2019, 5, 7))
-        # datetime.date 객체를 object로 변환
-        start_date = start_date.strftime('%Y-%m-%d')
-    with col2:
-        end_date = st.date_input('종료 날짜', datetime.datetime(2024, 5, 6))
-        # datetime.date 객체를 object로 변환
-        end_date = end_date.strftime('%Y-%m-%d')
     
+
+    st.subheader('원하는 날짜 내에 테슬라 주가를 확인할수 있습니다.:chart_with_upwards_trend:') 
+
+
+    
+    # 시작일과 종료일 생성 
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        start_year = st.selectbox('시작 연도', range(2019, 2025))
+    with col2:
+        start_month = st.selectbox('시작 월', range(1, 13),4)
+    with col3:
+        start_day = st.selectbox('시작 일', range(1, 32),6)
+
+    # 시작일을 datetime 객체로 변환
+    start_date = datetime.datetime(start_year, start_month, start_day)
+
+    # 종료일 생성
+    col4, col5, col6 = st.columns(3)
+    with col4:
+        end_year = st.selectbox('종료 연도', range(2019, 2025), index=5)
+    with col5:
+        end_month = st.selectbox('종료 월', range(1, 13),4)
+    with col6:
+        end_day = st.selectbox('종료 일', range(1, 32),5)
+
+    # 종료일을 datetime 객체로 변환
+    end_date = datetime.datetime(end_year, end_month, end_day)
+
+    # datetime 객체를 object로 변환
+    start_date = start_date.strftime('%Y-%m-%d')
+    end_date = end_date.strftime('%Y-%m-%d')
+
     # 지정된 날짜를 벗어나면 사용자에게 알리기
-    if start_date < df.index.min() or end_date > df.index.max():
-        st.error('2019년 5월 7일부터 2024년 5월 6일까지의 범위에서 날짜를 선택해주세요.')
+    if start_date < df.index.min() or end_date > df.index.max() or start_date >= end_date:
+        st.error('2019년 5월 7일부터 2024년 5월 6일까지의 범위에서 원하는 날짜를 순서에 맞게 선택해주세요.')
     else:
         # 데이터프레임을 선택한 날짜 범위에 따라 잘라내기
         df = df[(df.index >= start_date) & (df.index <= end_date)]
@@ -60,12 +82,13 @@ def data_run():
         # Tab 생성 + 차트 생성 
         tab1, tab2 = st.tabs(['캔들스틱 차트','라인 차트'])
         with tab1:
-            fig = go.Figure(go.Candlestick(x=df.index, open=df['시가'], high=df['최고가'], low=df['최저가'], close=df['종가']))
-            fig.update_layout(title="선택한 기간 동안의 캔들스틱 차트", xaxis_title="Date", yaxis_title="Price")
+            fig = go.Figure(go.Candlestick(x=df.index   , open=df['시가'], high=df['최고가'], low=df['최저가'], close=df['종가'] ,
+                                           increasing_line_color='red', decreasing_line_color='blue'))
+            fig.update_layout(title="선택한 기간의 캔들스틱 차트", xaxis_title="날짜", yaxis_title="주가")
             st.plotly_chart(fig)
         with tab2:
             fig = go.Figure(go.Scatter(x=df.index, y=df['종가'], mode='lines', name='종가'))
-            fig.update_layout(title="선택한 기간 동안의 라인 차트", xaxis_title="Date", yaxis_title="Price")
+            fig.update_layout(title="선택한 기간의 라인 차트", xaxis_title="날짜", yaxis_title="주가")
             st.plotly_chart(fig)       
         # 지정된 범위 내에서 최고가와 최저점 표시  
         if currency == '달러' :
@@ -80,5 +103,9 @@ def data_run():
             df_max = df['종가'].max()
             df_min = df['종가'].min()
             df_mean = df['종가'].mean() 
-            st.markdown("<h5>선택하신 날짜에서 테슬라의 최고가는" + str(df_max) + "원 이고, 최저가는 "+ str(df_min) + "원 입니다.", unsafe_allow_html=True)
-            st.markdown("<h5>평균 주가는 " + str(round(df_mean,2)) + "원 입니다.", unsafe_allow_html=True)
+            st.markdown("<h5>선택하신 날짜에서 테슬라의 최고가는" + comma(df_max) + "원 이고, 최저가는 "+ comma(df_min) + "원 입니다.", unsafe_allow_html=True)
+            st.markdown("<h5>평균 주가는 " + comma(round(df_mean)) + "원 입니다.", unsafe_allow_html=True)
+        
+        
+            
+

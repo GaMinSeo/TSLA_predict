@@ -1,16 +1,11 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-import streamlit.components.v1 as html
-from PIL import Image
-import numpy as np
-import pandas as pd
-import plotly.express as px
-import io
 from home import home_run
 from data import data_run
+from prop import prop_run
 
 def main() :
-    menu = ["홈", "테슬라 주가 데이터 및 차트", "테슬라 향후 주가 예측"]
+    menu = ["홈", "테슬라 주가 데이터 및 차트", "테슬라 주가 추세 예측"]
     with st.sidebar:
         choice = option_menu("메뉴", menu,
                          icons=['house', 'bi bi-clipboard2-data', 'bi bi-graph-up-arrow'],
@@ -29,7 +24,7 @@ def main() :
     elif choice == menu[1] :
         data_run()
     elif choice == menu[2] :
-        pass
+        prop_run()
 
 if __name__ == '__main__':
     main()

@@ -4,7 +4,6 @@ import streamlit as st
 import datetime
 from comma import comma
 
-import matplotlib.pyplot as plt
 def data_run():
     st.subheader('지난 테슬라 주가 데이터:clipboard:')
     st.write('2019년 5월 7일부터 2024년 5월 6일 까지의 테슬라 주가 데이터를 확인 할 수 있습니다.')
@@ -42,7 +41,7 @@ def data_run():
 
     st.subheader('원하는 날짜 내에 테슬라 주가를 확인할수 있습니다.:chart_with_upwards_trend:') 
 
-
+    # 셀렉트 박스로 원하는 날짜 표시
     
     # 시작일과 종료일 생성 
     col1, col2, col3 = st.columns(3)
@@ -89,7 +88,8 @@ def data_run():
         with tab2:
             fig = go.Figure(go.Scatter(x=df.index, y=df['종가'], mode='lines', name='종가'))
             fig.update_layout(title="선택한 기간의 라인 차트", xaxis_title="날짜", yaxis_title="주가")
-            st.plotly_chart(fig)       
+            st.plotly_chart(fig)
+                  
         # 지정된 범위 내에서 최고가와 최저점 표시  
         if currency == '달러' :
             df_max = df['종가'].max()

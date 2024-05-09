@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 import datetime
 from comma import comma
+import plotly.subplots as ms
 
 def data_run():
     st.subheader('지난 테슬라 주가 데이터:clipboard:')
@@ -39,7 +40,8 @@ def data_run():
     
     
 
-    st.subheader('원하는 날짜 내에 테슬라 주가를 확인할수 있습니다.:chart_with_upwards_trend:') 
+    st.subheader('원하는 날짜 내에 테슬라 주가를 확인할수 있습니다.:chart_with_upwards_trend:')
+    st.write('2019년 5월 7일부터 2024년 5월 6일까지의 범위에서 원하는 날짜를 순서에 맞게 선택해주세요.')
 
     # 셀렉트 박스로 원하는 날짜 표시
     
@@ -80,11 +82,28 @@ def data_run():
 
         # Tab 생성 + 차트 생성 
         tab1, tab2 = st.tabs(['캔들스틱 차트','라인 차트'])
+
+        # 캔들차트 표출
         with tab1:
-            fig = go.Figure(go.Candlestick(x=df.index   , open=df['시가'], high=df['최고가'], low=df['최저가'], close=df['종가'] ,
-                                           increasing_line_color='red', decreasing_line_color='blue'))
-            fig.update_layout(title="선택한 기간의 캔들스틱 차트", xaxis_title="날짜", yaxis_title="주가")
+            volume_bar = go.Bar(x=df.index, y=df['거래량'])
+            
+            # 캔들차트 변수 생성
+            candle = go.Candlestick(x=df.index   , open=df['시가'], high=df['최고가'], low=df['최저가'  ], close=df['종가'] ,
+                                    increasing_line_color='red', decreasing_line_color='blue')
+            fig = ms.make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.02)
+            fig.add_trace(candle, row=1, col=1)
+            fig.add_trace(volume_bar, row=2, col=1)
+            fig.update_layout(
+            title='테슬라 주식 가격',
+            yaxis1_title='주가',
+            yaxis2_title='거래량',
+            xaxis2_title='날짜',
+            xaxis1_rangeslider_visible=False,
+            xaxis2_rangeslider_visible=True,
+            )
             st.plotly_chart(fig)
+        
+        # 라인차트 표출
         with tab2:
             fig = go.Figure(go.Scatter(x=df.index, y=df['종가'], mode='lines', name='종가'))
             fig.update_layout(title="선택한 기간의 라인 차트", xaxis_title="날짜", yaxis_title="주가")
@@ -106,6 +125,8 @@ def data_run():
             st.markdown("<h5>선택하신 날짜에서 테슬라의 최고가는" + comma(df_max) + "원 이고, 최저가는 "+ comma(df_min) + "원 입니다.", unsafe_allow_html=True)
             st.markdown("<h5>평균 주가는 " + comma(round(df_mean)) + "원 입니다.", unsafe_allow_html=True)
         
+        # 데이터 출처 버튼
+        st.link_button('데이터 출처 바로가기',url = 'https://www.nasdaq.com/market-activity/stocks/tsla/historical')
         
             
 

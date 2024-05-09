@@ -20,6 +20,7 @@ prophet.fit(df_prophet)
 def prop_run():
 
     st.subheader('원하는 기간으로 테슬라의 추세를 예측합니다.:mag_right:')
+    st.image('./image/elon_musk.jpg')
 
     # 유저가 원하는 값 입력
     pro_text = st.number_input('추세 예측을 하기 위해 원하는 기간을 입력해주세요.', min_value = 30, value = 90, max_value = 365, step = 7, help='7일 부터 365일까지 입력 가능합니다.')  # 기본값을 100으로 설정

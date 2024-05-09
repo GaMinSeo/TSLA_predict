@@ -5,3 +5,5 @@
 참고 데이터 출처 : https://www.nasdaq.com/market-activity/stocks/tsla/historical
 
 홈 화면 이미지 출처 : https://www.hankyung.com/article/2021051567297
+
+예측 화면 이미지 출처 : https://www.busan.com/view/biz/view.php?code=2021051715112207345

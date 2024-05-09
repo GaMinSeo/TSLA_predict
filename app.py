@@ -17,8 +17,11 @@ elif platform.system() == 'Windows':
     font_name = font_manager.FontProperties(fname=font_path).get_name()
     rc('font', family=font_name)
 def main() :
-    menu = ["홈", "테슬라 주가 데이터 및 차트", "테슬라 주가 추세 예측"]
+    menu = ["홈", "테슬라 주가 데이터", "테슬라 주가 추세 예측"]
+
+    # 사이드바 개발
     with st.sidebar:
+        st.image('./image/pngwing.com.png')
         choice = option_menu("메뉴", menu,
                          icons=['house', 'bi bi-clipboard2-data', 'bi bi-graph-up-arrow'],
                          menu_icon="bi bi-list", default_index=0,
@@ -30,7 +33,7 @@ def main() :
     }
     )
         st.link_button('데이터 출처 바로가기',url = 'https://www.nasdaq.com/market-activity/stocks/tsla/historical')
-
+        
     if choice == menu[0] :
         home_run()
     elif choice == menu[1] :

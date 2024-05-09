@@ -45,16 +45,16 @@ jupyter notebook을 통해, HistoricalData_tsla.csv 파일을 통계 분석하�
 ## 이슈 개선
 #### Prophet 예측 그래프 라벨에서 한글이 깨지는 현상 인지
 
-#한글 폰트 사용하기
+##### 해결 방법
 
-#필요한 라이브러리 임포트
+###### 필요한 라이브러리 임포트
 ```bash
 import platform
 
 from matplotlib import font_manager, rc
 ```
 
-#한글 폰트 적용 코드 작성
+###### 한글 폰트 적용 코드 작성
 ```bash
 plt.rcParams['axes.unicode_minus'] = False
 

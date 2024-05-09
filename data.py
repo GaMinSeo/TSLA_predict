@@ -13,7 +13,7 @@ def data_run():
     currency = st.radio('화폐 단위 선택:dollar:',['달러', '원화'])
     st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
-    st.text('원화 환율 계산은 5월 7일 1,360원으로 계산함')
+    st.text('원화 환율 계산은 5월 7일 기준 1,360원으로 계산함')
     if currency == '달러' :
         st.success('달러 형식 데이터프레임을 출력합니다.')
         df = pd.read_csv('./data/TSLA.csv')

@@ -1,4 +1,4 @@
-# **TSLA_predict (Tesla 주식 추세 예측 프로젝트)**
+# **TSLA_predict (테슬라 주식 추세 예측 프로젝트)**
 
 
 ## 프로젝트 소개

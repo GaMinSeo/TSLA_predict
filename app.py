@@ -1,9 +1,21 @@
+import platform
+from matplotlib import font_manager, rc
 import streamlit as st
 from streamlit_option_menu import option_menu
 from home import home_run
 from data import data_run
 from prop import prop_run
+import matplotlib.pyplot as plt
 
+
+plt.rcParams['axes.unicode_minus'] = False
+if platform.system() == 'Linux':
+    rc('font', family='NanumGothic')
+elif platform.system() == 'Windows':
+    # 윈도우 환경에서 한글 폰트 설정
+    font_path = "c:\WINDOWS\Fonts\GULIM.TTC"  # 한글 폰트 파일 경로
+    font_name = font_manager.FontProperties(fname=font_path).get_name()
+    rc('font', family=font_name)
 def main() :
     menu = ["홈", "테슬라 주가 데이터 및 차트", "테슬라 주가 추세 예측"]
     with st.sidebar:

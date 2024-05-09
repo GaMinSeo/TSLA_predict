@@ -7,3 +7,5 @@
 홈 화면 이미지 출처 : https://www.hankyung.com/article/2021051567297
 
 예측 화면 이미지 출처 : https://www.busan.com/view/biz/view.php?code=2021051715112207345
+
+사이드바 이미지 출처 : https://www.pngwing.com/ko/free-png-kmyxv

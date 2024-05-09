@@ -38,4 +38,6 @@ def prop_run():
         # 트렌드와 계절성 그래프 시각화
         fig = prophet.plot_components(forecast)
         st.pyplot(fig)
+
+        st.link_button('데이터 출처 바로가기',url = 'https://www.nasdaq.com/market-activity/stocks/tsla/historical',use_container_width=True)
         

@@ -90,6 +90,7 @@ def data_run():
             # 캔들차트 변수 생성
             candle = go.Candlestick(x=df.index   , open=df['시가'], high=df['최고가'], low=df['최저가'  ], close=df['종가'] ,
                                     increasing_line_color='red', decreasing_line_color='blue')
+            
             fig = ms.make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.02)
             fig.add_trace(candle, row=1, col=1)
             fig.add_trace(volume_bar, row=2, col=1)
@@ -105,7 +106,20 @@ def data_run():
         
         # 라인차트 표출
         with tab2:
-            fig = go.Figure(go.Scatter(x=df.index, y=df['종가'], mode='lines', name='종가'))
+            # 라인차트 변수 생성
+            line = go.Scatter(x=df.index, y=df['종가'], mode='lines', name='종가')
+            fig = ms.make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.02)
+            fig.add_trace(line, row=1, col=1)
+            fig.add_trace(volume_bar, row=2, col=1)
+            fig.update_layout(
+            title='테슬라 주식 가격',
+            yaxis1_title='주가',
+            yaxis2_title='거래량',
+            xaxis2_title='날짜',
+            xaxis1_rangeslider_visible=False,
+            xaxis2_rangeslider_visible=True,
+            )
+
             fig.update_layout(title="선택한 기간의 라인 차트", xaxis_title="날짜", yaxis_title="주가")
             st.plotly_chart(fig)
                   

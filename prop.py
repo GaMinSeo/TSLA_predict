@@ -1,8 +1,24 @@
+import platform
+from matplotlib import font_manager, rc
 import streamlit as st
 from prophet import Prophet
 import pandas as pd
 import matplotlib.pyplot as plt
 from prophet.plot import plot_components
+
+
+#한글 폰트 사용하기
+plt.rcParams['axes.unicode_minus'] = False
+if platform.system() == 'Linux':
+    rc('font', family='NanumGothic')
+elif platform.system() == 'Windows':
+    # 윈도우 환경에서 한글 폰트 설정
+    font_path = "c:\WINDOWS\Fonts\GULIM.TTC"  # 한글 폰트 파일 경로
+    font_name = font_manager.FontProperties(fname=font_path).get_name()
+    rc('font', family=font_name)
+def main() :
+    menu = ["홈", "테슬라 주가 데이터", "테슬라 주가 추세 예측"]
+
 
 # 데이터 프레임 불러오기
 prophet = Prophet()

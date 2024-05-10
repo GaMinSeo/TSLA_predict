@@ -8,9 +8,19 @@
 
 이 앱은 지난 주가를 분석해보고 앞으로의 추세를 예측합니다.
 
+---
+
+- ### 데이터 출처
+> URL : <https://www.nasdaq.com/market-activity/stocks/tsla/historical>
+
+---
+
+- ## 배포 주소
+
+> URL : <http://ec2-52-78-84-125.ap-northeast-2.compute.amazonaws.com:8502/>
 
 ------
-## 주요 기능
+## 앱 대시보드 기능 기획
 
 - 주식 데이터 분석 및 가공
 - 주식 데이터 달러 및 원화로 변경 가능
@@ -21,14 +31,9 @@
 - Streamlit을 사용한 앱 대시보드 구축
 
 ------
-## 배포 주소
-
-> URL : <http://ec2-52-78-84-125.ap-northeast-2.compute.amazonaws.com:8502/>
-
-------
 ## 개발 환경 및 기술 스택
 
-jupyter notebook을 통해, HistoricalData_tsla.csv 파일을 통계 분석하고, plotly 라이브러리를 통해 캔들차트 및 라인차트로 볼 수 있게 데이터 시각화를 진행했습니다.
+jupyter notebook을 통해, HistoricalData_tsla.csv 파일을 분석 / 가공 하고, plotly 라이브러리를 통해 캔들차트 및 라인차트로 데이터를 확인할수 있도록 시각화를 작업을 진행했습니다.
 
 또한 사용자에게 원하는 기간을 입력 받아 Prophet을 통해 원하는 기간의 주식 추세에 대한 시계열 예측 분석을 진행 하였습니다.
 
@@ -72,6 +77,6 @@ elif platform.system() == 'Windows':
     
     rc('font', family=font_name)
 ```
-## ✏ 작성자
+## 작성자
 - 가민서
 - e-mail : rkalstj23@naver.com
